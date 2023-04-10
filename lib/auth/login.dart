@@ -63,20 +63,24 @@ class _LoginState extends State<Login> {
                 ),
               ),
               ElevatedButton(
-                  style: const ButtonStyle(
-                    padding: MaterialStatePropertyAll(
-                      EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-                    ),
-                    backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                    textStyle: MaterialStatePropertyAll(
-                      TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
+                style: const ButtonStyle(
+                  padding: MaterialStatePropertyAll(
+                    EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+                  ),
+                  // backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                  textStyle: MaterialStatePropertyAll(
+                    TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
                     ),
                   ),
-                  onPressed: () {},
-                  child: const Text("Login"))
+                ),
+                onPressed: () {},
+                child: const Text(
+                  "Login",
+                  // style: Theme().textTheme.headlineLarge,
+                ),
+              ),
             ],
           )),
         )
