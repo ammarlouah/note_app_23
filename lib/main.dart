@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'auth/login.dart';
+import 'auth/signup.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "login": (context) => const Login(),
+        "signup":(context) => const SignUp(),
       },
     );
   }

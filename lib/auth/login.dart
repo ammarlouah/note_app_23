@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app_23/auth/signup.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -57,7 +58,9 @@ class _LoginState extends State<Login> {
                         "Click here",
                         style: TextStyle(color: Colors.blue),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pushNamed("signup");
+                      },
                     )
                   ],
                 ),
