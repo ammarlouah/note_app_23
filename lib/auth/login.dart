@@ -78,7 +78,9 @@ class _LoginState extends State<Login> {
                     ),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushReplacementNamed("homepage");
+                },
                 child: const Text(
                   "Login",
                   // style: Theme().textTheme.headlineLarge,

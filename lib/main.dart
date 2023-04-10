@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app_23/home/homepage.dart';
 
 import 'auth/login.dart';
 import 'auth/signup.dart';
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
       home: const Login(),
       theme: ThemeData(
         primaryColor: Colors.blue,
+        appBarTheme: const AppBarTheme(color: Colors.blue),
         textTheme: const TextTheme(bodyLarge: TextStyle(fontSize: 20)),
         elevatedButtonTheme: const ElevatedButtonThemeData(
           style: ButtonStyle(
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         "login": (context) => const Login(),
-        "signup":(context) => const SignUp(),
+        "signup": (context) => const SignUp(),
+        "homepage": (context) => const HomePage(),
       },
     );
   }
