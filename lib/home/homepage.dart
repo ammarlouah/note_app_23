@@ -21,7 +21,9 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Home Page"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed('addnotes');
+        },
         child: const Icon(Icons.add),
       ),
       // ignore: avoid_unnecessary_containers
@@ -64,7 +66,8 @@ class ListNotes extends StatelessWidget {
           Expanded(
             flex: 6,
             child: ListTile(
-              title: Text("${notes['note']}"),
+              title: const Text('Title'),
+              subtitle: Text("${notes['note']}"),
             ),
           ),
           Expanded(
