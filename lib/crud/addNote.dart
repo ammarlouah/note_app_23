@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class AddNotes extends StatefulWidget {
   const AddNotes({super.key});
@@ -8,6 +10,19 @@ class AddNotes extends StatefulWidget {
 }
 
 class _AddNotesState extends State<AddNotes> {
+  File? image;
+  final imgPk = ImagePicker();
+  uploadImage(ImageSource src) async {
+    var picked = await imgPk.pickImage(source: src);
+    if (picked != null) {
+      setState(() {
+        image = File(picked.path);
+      });
+      Navigator.pop(context);
+    }
+    ;
+  }
+
   showBottomSheet() {
     return showModalBottomSheet(
       context: context,
@@ -32,7 +47,7 @@ class _AddNotesState extends State<AddNotes> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () => uploadImage(ImageSource.gallery),
                         child: Column(
                           children: const [
                             Icon(Icons.photo_album_outlined, size: 40),
@@ -44,7 +59,7 @@ class _AddNotesState extends State<AddNotes> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () => uploadImage(ImageSource.camera),
                         child: Column(
                           children: const [
                             Icon(Icons.camera_alt_outlined, size: 40),
@@ -72,60 +87,66 @@ class _AddNotesState extends State<AddNotes> {
       appBar: AppBar(
         title: const Text('Add Note'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(5),
-        child: Column(
-          children: [
-            Form(
-                child: Column(
-              children: [
-                TextFormField(
-                  maxLength: 30,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    labelText: "Note title",
-                    prefixIcon: Icon(Icons.note),
-                  ),
-                ),
-                TextFormField(
-                  minLines: 1,
-                  maxLines: 3,
-                  decoration: const InputDecoration(
-                    filled: true,
-                    fillColor: Colors.white,
-                    labelText: "Note",
-                    prefixIcon: Icon(Icons.note),
-                  ),
-                ),
-                TextButton(
-                  style: const ButtonStyle(
-                    maximumSize: MaterialStatePropertyAll(
-                      Size.fromWidth(200),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(5),
+          child: Column(
+            children: [
+              Form(
+                  child: Column(
+                children: [
+                  TextFormField(
+                    maxLength: 30,
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: "Note title",
+                      prefixIcon: Icon(Icons.note),
                     ),
                   ),
-                  onPressed: () {
-                    showBottomSheet();
-                  },
-                  child: Row(
-                    children: const [
-                      Icon(Icons.upload_file),
-                      Text("Upload image"),
-                    ],
-                  ),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  style: const ButtonStyle(
-                    padding: MaterialStatePropertyAll(
-                      EdgeInsets.all(20),
+                  TextFormField(
+                    minLines: 1,
+                    maxLines: 3,
+                    decoration: const InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                      labelText: "Note",
+                      prefixIcon: Icon(Icons.note),
                     ),
                   ),
-                  child: const Text('Add Note'),
-                ),
-              ],
-            ))
-          ],
+                  TextButton(
+                    style: const ButtonStyle(
+                      maximumSize: MaterialStatePropertyAll(
+                        Size.fromWidth(200),
+                      ),
+                    ),
+                    onPressed: () {
+                      showBottomSheet();
+                    },
+                    child: Row(
+                      children: const [
+                        Icon(Icons.upload_file),
+                        Text("Upload image"),
+                      ],
+                    ),
+                  ),
+                  image == null ? Text("Not photo chosen") : Image.file(image!),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: const ButtonStyle(
+                      padding: MaterialStatePropertyAll(
+                        EdgeInsets.all(20),
+                      ),
+                    ),
+                    child: const Text('Add Note'),
+                  ),
+                ],
+              ))
+            ],
+          ),
         ),
       ),
     );
